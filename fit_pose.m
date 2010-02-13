@@ -14,7 +14,7 @@
 % @return alpha_v Vektor von Servowinkeln in rad einer Gelenkkette der Länge n+1, beginnend mit 0
 %
 %%
-function [xJ_v yJ_v alpha_v]=fit_pose( pose, n, L, alpha_max )
+function [xJ_v, yJ_v, alpha_v]=fit_pose( pose, n, L, alpha_max )
 
 	% xJ_v(1) ist der Startpunkt der Gelenkkette, und Null. xJ_v(2) ist der Endpunkt
 	% des ersten Gelenks und gleichzeitig der Startpunkt des zweiten. Usw...
@@ -37,7 +37,7 @@ function [xJ_v yJ_v alpha_v]=fit_pose( pose, n, L, alpha_max )
 	%ylabel('Seitliche Auslenkung');
 	%legend('Berechnete Schwanz Pose');
 	%line([xJ_v(1:end-1);xJ_v(2:end)],[yJ_v(1:end-1);yJ_v(2:end)],'Color','r');
-	%titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%f L=%f alpha_maxf=%f',n,L,alpha_max);
+	%titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%f L=%f alpha_{max}=%f',n,L,alpha_max);
 	%title(titlename);
 
 	%filename = sprintf('fit_pose.png');
