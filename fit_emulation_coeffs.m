@@ -6,13 +6,16 @@
 %
 % @param alpha_M Matrix aller Gelenkwinkel über eine Bewegungsseqeunz, könnte zum Beispiel von einer Minimierungsfunktion zur Anpassung an eine berechnete Schwanzform stammen
 %
-% @return Gibt einen Vektor von Parametern zurück, c1 und c2
+% @return c1
+% @return c2
 %
 %%
-function [emulation_coeffs_v] = fit_emulation_coeffs( alpha_M );
+function [c1 c2] = fit_emulation_coeffs( alpha_M );
 
 	% Das hier ist eigentlich nur eine Wrapperfunktion.
 	emulation_coeffs_v = fminsearch(@funfun,[0.1 1],[],[],alpha_M);
+	c1 = emulation_coeffs_v(1);
+	c2 = emulation_coeffs_v(2);
 
 
 function out=funfun(coeff,alpha_M)
