@@ -1,0 +1,9 @@
+Welcome to
+
+	lokomotor2k
+
+Fischanimationen leicht gemacht!
+--------------------------------
+
+Es lässt sich eine Kurvensequenz vorgeben, für welche die Gelenkwinkel berechnet werden. Daraus wiederrum lassen sich unter Umständen Funktionen für diese Winkel über die Zeit ableiten. Beispiel:
+	x*sin(x-t)

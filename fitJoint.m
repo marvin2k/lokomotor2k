@@ -1,4 +1,8 @@
 %%
+% @brief Minimierungsfunktion um Gelenkwinkel zu schätzen
+% 
+% TODO: Holzklassefunktion, überarbeiten...
+%
 %%
 function [alpha] = fitJoint( alpha_last, alpha_max, xF, yF, sineCurve );
 
