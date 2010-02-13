@@ -1,24 +1,23 @@
 %%
 % @brief Berechnet aus gegebenen Parametern eine Matrix von Servowinkeln. Beschreiben den zeitlichen Verlauf einer Bewegungssequenz
 %
-% @param f
-% @param u
-% @param n
-% @param L
-% @param alpha_max
+% @param f Frequenz der zugrundeliegenden x*Sinus-Schwingung
+% @param u Amplitude der zugrundeliegenden x*Sinus-Schwingung
+% @param T Anzahl der Einzelschritte für eine komeplette Sequeuz
+% @param n Gelenkanzahl
+% @param L Gelenklnge in mm
+% @param alpha_max Maximaler Öffnungswinkel in rad
 %
-% @return xJ_M
-% @return yJ_M
-% @return alpha_M
+% @return xJ_M Matrix aller X-Koordinaten des Ursprungs und aller Gelenkenden. Jede Zeile eine Stellung
+% @return yJ_M Matrix aller X-Koordinaten des Ursprungs und aller Gelenkenden. Jede Zeile eine Stellung
+% @return alpha_M Matrix aller Gelenkwinkel des Ursprungs und aller Gelenke. Jede Zeile eine Stellung
 %
 %%
-function [xJ_M, yJ_M, alpha_M]=fit_sequenz( f, u, n, L, alpha_max )
-
+function [xJ_M, yJ_M, alpha_M]=fit_sequenz( f, u, T, n, L, alpha_max )
 
 % nur wenn sich der Schwanz komplett lang macht, hat er die maximale Länge
 x=[0:L*n];
 %wieviele einzelbilder in der Sequenz?
-T=50;
 
 % Matrizen vorbereiten
 xJ_M = zeros(T,n+1);
