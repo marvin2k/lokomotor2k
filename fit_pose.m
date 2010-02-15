@@ -1,6 +1,8 @@
 %%
 % @brief Berechnet zu einer einzelnen Schwanzpose einen Vektor von n Servowinkeln
 %
+% TODO: alpha_max besser behandeln. Oberhalb dieser Funktion macht es aber keinen Sinn, da sonst ungültige Winkel von der Minimierungsfunktion geliefert werden können. Unterhalb macht Sinn... vielleicht auch so lassen
+%
 % @param pose
 % @param n
 % @param L

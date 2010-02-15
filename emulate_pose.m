@@ -4,7 +4,7 @@
 % @param coeffs_v Koeefizientenvektor mit c1 c2 k und T
 % @param n Anzahl der Gelenke
 % @param L Länge der Gelenkstücke
-% @param t_seq Ein Zeitpunkt...
+% @param t_seq Ein Zeitpunkt. Jede Sequenz liegt in dem Bereich von 0 bis 1"t". delta_t ist dann die "Geschwindigkeit" mit der die Seqeunz ausgeführt wird. In der späteren Animation wird dann delta_t künstlich konstant gemacht. Und das sieht dann gut aus
 %
 % @return xJ_v Vektor von X-Koordinaten der Joints einer Gelenkkette der Länge n+1, beginnend mit [0,0] 
 % @return yJ_v Vektor von Y-Koordinaten der Joints einer Gelenkkette der Lange n+1, beginnend mit [0,0] 

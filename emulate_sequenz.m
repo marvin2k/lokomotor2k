@@ -1,35 +1,29 @@
 %%
 % @brief Erstellung einer Sequenz beliebiger Länge mit gegebener Parametermatrix
 %
-% @param coeffs_M Enthält c1 c2 k und T, jeweils eine Zeile für ein einzelnes Bild der gesamten Sequenz
-% @param n
-% @param L
-% @param anim_len Länge der Animation in "Frames"
-% @param alpha_max
+% @param coeffs_M Enthält c1 c2 k und T, jeweils eine Zeile für ein einzelnes Bild der gesamten Sequenz. Somit kodiert diese Matrix auch die Länge der Animationssequenz in Bildern
+% @param n Anzahl der Gelenke
+% @param L Länge der Einzelnen Gelenkabschnitte
+% @param alpha_max Maximaler Biegeradiu (TODO: Auswerten, wird zur Zeit nur zur Anzeige verwendet)
 %
+% @return Das übliche... Koordinaten und Winkel
 %%
-function [alpha_M]=emulate_sequenz( coeffs_M, n, L, anim_len, alpha_max )
-%erstellung einer sequenz:
-%a=0.07;b=1.2;len=40;coeffs=[ones(1,len)*a;ones(1,len)*b;sin(1/len*pi*[1:len])*0.15;ones(1,len)*20]';
+function [xJ_M yJ_M alpha_M]=emulate_sequenz( coeffs_M, n, L, alpha_max )
 
-clf;
-hold on;
-
-seq_len = length(coeffs);%anzahl der einzelbilder, entsprechend der anzahl der coeffizienten
-len_bone = 80;
-t=0;
+% Anzahl der Einzelbilder, entsprechend der Anzahl der Koeffizienten
+animation_length = length(coeffs_M);
 
 for frame = 1:seq_len
 	clf;
-	% Aktuelle Parameter feststellen
-	c1 = coeffs(frame,1);%amplitude
-	c2 = coeffs(frame,2);%welligkeit
-	k = coeffs(frame,3);%kurve
-	T = coeffs(frame,4);%schlagfrequenz
+	% Aktuelle Parameter feststellen (Eigentlich nur zum plotten nötig)
+	c1 = coeffs_M(frame,1);%amplitude
+	c2 = coeffs_M(frame,2);%welligkeit
+	k = coeffs_M(frame,3);%kurve
+	T = coeffs_M(frame,4);%schlagfrequenz
 
 	t=t+1/T;
 
-	alpha_v = get_servo_angles( 5, t, coeffs(frame,:) );
+	alpha_v = get_servo_angles( 5, t, coeffs_M(frame,:) );
 	alpha_M(frame,:) = alpha_v;
 	% Plot für Animation: Ein Schwanz immer der gleichen Farbe, der jedesmal gelöscht wird
 subplot(2,1,1)
