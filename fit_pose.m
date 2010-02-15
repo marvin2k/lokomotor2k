@@ -39,7 +39,7 @@ function [xJ_v, yJ_v, alpha_v]=fit_pose( pose, n, L, alpha_max )
 %	ylabel('Seitliche Auslenkung');
 %	legend('Berechnete Schwanz Pose');
 %	line([xJ_v(1:end-1);xJ_v(2:end)],[yJ_v(1:end-1);yJ_v(2:end)],'Color','r');
-%	axis([0 length(pose) -3*max(abs(yJ_v)) 3*max(abs(yJ_v))],'equal');
+%	axis([0 n*L -3*L 3*L],'equal');
 %	draw_half_circles( xJ_v(1:end-1), yJ_v(1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_v(1:end-1));
 %	titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%f L=%f alpha_{max}=%f',n,L,alpha_max);
 %	title(titlename);
