@@ -20,7 +20,9 @@ u = param_u;
 [xJ_M yJ_M alpha_M] = fit_sequenz(f, u, T, n, L, alpha_max );
 
 [c1 c2] = fit_emulation_coeffs( alpha_M );
+coeffs_v = [c1 c2 0 T]
 
-coeffs = param_coeffs;
+%coeffs_v = param_coeffs;
+coeffs_M = coeffs_v*ones(1,T);
 
-emulate_sequenz( c1*ones(1,T) c2*ones(1,T), n, L, alpha_max )
+emulate_sequenz( coeffs_M, n, L, T, alpha_max )

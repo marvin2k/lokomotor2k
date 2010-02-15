@@ -1,10 +1,14 @@
 %%
-% @brief Statische erstellung einer einzelnen Sequenz mit gegebenen Parametern
+% @brief Erstellung einer Sequenz beliebiger Länge mit gegebener Parametermatrix
 %
-%
+% @param coeffs_M Enthält c1 c2 k und T, jeweils eine Zeile für ein einzelnes Bild der gesamten Sequenz
+% @param n
+% @param L
+% @param anim_len Länge der Animation in "Frames"
+% @param alpha_max
 %
 %%
-function [alpha_M]=emulate_sequenz( coeffs, n, L, T, alpha_max )
+function [alpha_M]=emulate_sequenz( coeffs_M, n, L, anim_len, alpha_max )
 %erstellung einer sequenz:
 %a=0.07;b=1.2;len=40;coeffs=[ones(1,len)*a;ones(1,len)*b;sin(1/len*pi*[1:len])*0.15;ones(1,len)*20]';
 
@@ -21,9 +25,9 @@ for frame = 1:seq_len
 	c1 = coeffs(frame,1);%amplitude
 	c2 = coeffs(frame,2);%welligkeit
 	k = coeffs(frame,3);%kurve
-	f_schwanz = coeffs(frame,4);%schlagfrequenz
+	T = coeffs(frame,4);%schlagfrequenz
 
-	t=t+1/f_schwanz;
+	t=t+1/T;
 
 	alpha_v = get_servo_angles( 5, t, coeffs(frame,:) );
 	alpha_M(frame,:) = alpha_v;
