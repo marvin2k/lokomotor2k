@@ -20,7 +20,6 @@ param_u = 0.1;
 % Bereits ermittelte Beispielwerte für c1 und c2, Kurvenschwimmen und Sequenzdauer
 param_c1 = 1;
 param_c2 = 1;
-param_k = 0;
+param_k = 0.00001;%damits beim normierne keine division durch null gibt...
+param_delta_t = 0.1;
 param_animation_length = 50;%gibts schon, oben
-param_coeffs_v = [param_c1 param_c2 param_k param_animation_length];
-

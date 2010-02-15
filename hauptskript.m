@@ -21,11 +21,12 @@ u = param_u;
 
 [c1 c2] = fit_emulation_coeffs( alpha_M );
 animation_length = param_animation_length;
+delta_t = param_delta_t;
 % Parameter aus Datei laden: %c1 = param_c1; %c2 = param_c2;
 %k fehlt noch
-coeffs_v = [c1 c2 0 animation_length];
+coeffs_v = [c1 c2 0 delta_t];
 
 % Paramter übernehmen (Zusammengebaute Matrix Transponieren!)
 coeffs_M = [c1*ones(1,animation_length); c2*ones(1,animation_length); 0*ones(1,animation_length); delta_t*ones(1,animation_length)]';
 
-[xJ_M2 yJ_M2 alpha_M2] = emulate_sequenz( coeffs_M, n, L, animation_length, alpha_max )
+[xJ_M2 yJ_M2 alpha_M2] = emulate_sequenz( coeffs_M, n, L, animation_length, alpha_max );

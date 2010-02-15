@@ -10,4 +10,6 @@ Es lässt sich eine Kurvensequenz vorgeben, für welche die Gelenkwinkel berechn
 
 calc_*			Mathematische Berechnung mit exakter Formel
 fit_*			Approximierende Funktion zur Parameterfeststellung
-emulatge_*		Anwendung der gefundenen Parameter um die exakte mathematische Formel zu emulieren
+emulate_*		Anwendung der gefundenen Parameter um die exakte mathematische Formel zu emulieren
+
+wo war ich: emulate_sequenz läuft unter octave sehr seht zäh und macht auch ncith alles richtig. eventuell matlab? oder fehler? unterfunktion prüfen. ansonsten fast durch
