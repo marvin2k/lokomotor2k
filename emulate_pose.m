@@ -5,12 +5,13 @@
 % @param n Anzahl der Gelenke
 % @param L Länge der Gelenkstücke
 % @param t_seq Ein Zeitpunkt. Jede Sequenz liegt in dem Bereich von 0 bis 1"t". delta_t ist dann die "Geschwindigkeit" mit der die Seqeunz ausgeführt wird. In der späteren Animation wird dann delta_t künstlich konstant gemacht. Und das sieht dann gut aus
+% @param alpha_max Wird nur zur korrekten Anzeige verwendet, falls hier ein Grph während des debugging geplottet werden soll
 %
 % @return xJ_v Vektor von X-Koordinaten der Joints einer Gelenkkette der Länge n+1, beginnend mit [0,0] 
 % @return yJ_v Vektor von Y-Koordinaten der Joints einer Gelenkkette der Lange n+1, beginnend mit [0,0] 
 % @return Enthält analog zum Rückgabewert von fit_pose.m n+1 Winkel, welche eine Schwanzpose beschreiben. Der erste ist Null, und dient der "Aufhängung"
 %%
-function [xJ_v yJ_v alpha_v] = emulate_pose( coeffs_v, n, L, t_seq )
+function [xJ_v yJ_v alpha_v] = emulate_pose( coeffs_v, n, L, t_seq, alpha_max )
 	
 	c1 = coeffs_v(1);
 	c2 = coeffs_v(2);
@@ -33,15 +34,15 @@ function [xJ_v yJ_v alpha_v] = emulate_pose( coeffs_v, n, L, t_seq )
         yJ_v(idx) = L*sin( alpha_v(idx) ) + yJ_v(idx-1);
 	end
 
-	clf;
-	hold on;
-	xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
-	ylabel('Seitliche Auslenkung');
-	line([xJ_v(1:end-1);xJ_v(2:end)],[yJ_v(1:end-1);yJ_v(2:end)],'Color','r');
-	axis([0 length(pose) -3*max(abs(yJ_v)) 3*max(abs(yJ_v))],'equal');
-	draw_half_circles( xJ_v(1:end-1), yJ_v(1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_v(1:end-1));
-	titlename = sprintf('Emulierte Schwanzsegementen\nc1=%f c2=%f k=%f alpha_{max}=%f',c1,c2,k,alpha_max);
-	title(titlename);
+%	clf;
+%	hold on;
+%	xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
+%	ylabel('Seitliche Auslenkung');
+%	line([xJ_v(1:end-1);xJ_v(2:end)],[yJ_v(1:end-1);yJ_v(2:end)],'Color','r');
+%	axis([0 (n+1)*L -3*L 3*L],'equal');
+%	draw_half_circles( xJ_v(1:end-1), yJ_v(1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_v(1:end-1));
+%	titlename = sprintf('Emulierte Schwanzsegemente\nc1=%f c2=%f k=%f delta_t=%f',c1,c2,k,delta_t);
+%	title(titlename);
 
-	filename = sprintf('emulate_pose.png');
-	print(filename,'-dpng');
+%	filename = sprintf('emulate_pose.png');
+%	print(filename,'-dpng');
