@@ -7,7 +7,7 @@
 %%
 function [] = hauptscript()
 
-% Parameter laden
+% Parameter laden. Diese liegen als Zahlen in einer seperaten m-Datei und sieht mit einem suffix vor dem lokalen Namensraum geschützt
 params;
 % Benötigte Parameter in den lokalen Namensraum hohlen
 n = param_n;

@@ -12,4 +12,8 @@ calc_*			Mathematische Berechnung mit exakter Formel
 fit_*			Approximierende Funktion zur Parameterfeststellung
 emulate_*		Anwendung der gefundenen Parameter um die exakte mathematische Formel zu emulieren
 
-wo war ich: emulate_sequenz läuft unter octave sehr seht zäh und macht auch ncith alles richtig. eventuell matlab? oder fehler? unterfunktion prüfen. ansonsten fast durch
+wo war ich: emulate_sequenz läuft unter octave sehr sehr zäh und macht auch nicht alles richtig. Eventuell matlab? oder fehler? unterfunktion prüfen. ansonsten fast durch
+
+Verwendung:
+
+siehe hauptscript.m
