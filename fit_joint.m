@@ -4,7 +4,7 @@
 % TODO: Holzklassefunktion, überarbeiten...
 %
 %%
-function [alpha] = fitJoint( alpha_last, alpha_max, xF, yF, sineCurve );
+function [alpha] = fit_joint( alpha_last, alpha_max, xF, yF, sineCurve );
 
 %seltsamer startwert nötig, da der such algorithmus irgendwie positive winkel zu bevorzugen scheint. wenn bei null begonnen wird zu suchen werden keine gelenkwiinkel unter ungefähr -0.5rad beachtet. deswegen ganz hinten anfangen
 alpha = fminsearch(@funfun,[-0.5],[],[],alpha_last, alpha_max, xF, yF, sineCurve);

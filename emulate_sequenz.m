@@ -11,7 +11,7 @@
 %
 % @return Das übliche... Koordinaten und Winkel über die Zeit
 %%
-function [xJ_M yJ_M alpha_M]=emulate_sequenz( coeffs_M, n, L, alpha_max )
+function [xJ_M yJ_M alpha_M] = emulate_sequenz( coeffs_M, n, L, alpha_max )
 % Frames per Second, für die zu erstellende Animation
 fps = 24;
 
@@ -35,10 +35,15 @@ for frame = 1:animation_length
     delta_t = coeffs_M(frame,4);%schlagfrequenz
 
     % t weiterlaufen lassen, darf auch über 1 hinausgehen, wird später mit 2pi normiert und fällt dann in die Periodizität von sin weg
-    t_seq = t_seq + delta_t
+    t_seq = t_seq + delta_t;
 
-    % Kernstück: Berechnung der Stellung
+    % Kernstück: Berechnung der Stellung. Rückgabeformat das gleiche wie das von fit_pose!
     [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = emulate_pose( coeffs_M(frame,:), n, L, t_seq );
+
+end
+
+   % Zeichnen
+for frame = 1:animation_length
 
     clf;
     hold on;
@@ -49,8 +54,11 @@ for frame = 1:animation_length
     xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
     ylabel('Seitliche Auslenkung');
     line([xJ_M(frame,1:end-1);xJ_M(frame,2:end)],[yJ_M(frame,1:end-1);yJ_M(frame,2:end)],'Color','r');
-    axis([0 (n+1)*L -3*L 3*L],'equal');
+    axis([0 n*L*1.1 -max(max(abs(yJ_M)))*1.5 max(max(abs(yJ_M)))*1.5]);
+    % selbst gebaute Funktion zum anzeigen der physikalisch möglichen Drehwinkel eines Gelenks
     draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
+
+    legend('Berechnete Schwanzpose','Segmentgeraden des Roboterschwanzes');
     titlename = sprintf('Emulierte Schwanzsegemente\nc1=%f c2=%f k=%f delta_t=%f',c1,c2,k,delta_t);
     title(titlename);
 
