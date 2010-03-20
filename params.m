@@ -14,7 +14,7 @@ param_alpha_max = 29/360*2*pi;
 param_number_of_frames = 50;
 
 % Eigenschaften der zugrundeliegenden x*sin-Schwingung
-param_f = 0.018;
+param_f = 0.0009;
 param_u = 0.1;
 
 % Bereits ermittelte Beispielwerte für c1 und c2, Kurvenschwimmen und Sequenzdauer
