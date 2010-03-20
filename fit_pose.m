@@ -26,8 +26,8 @@ function [xJ_v, yJ_v, alpha_v]=fit_pose( pose, n, L, alpha_max )
 
     %bei 2 beginnend, der erste Index ist der "Fixpunkt" und dient der Aufhängung
     for idx=2:n+1
-        %TODO fitJoint umbauen und die beachtung des letzten winkel und des maximalen winkels hier hin verlagern
-        alpha_v(idx) = fitJoint( alpha_v(idx-1), alpha_max, xJ_v(idx-1), yJ_v(idx-1), pose );
+        %TODO fit_joint umbauen und die beachtung des letzten winkel und des maximalen winkels hier hin verlagern
+        alpha_v(idx) = fit_joint( alpha_v(idx-1), alpha_max, xJ_v(idx-1), yJ_v(idx-1), pose );
         xJ_v(idx) = L*cos( alpha_v(idx) ) + xJ_v(idx-1);
         yJ_v(idx) = L*sin( alpha_v(idx) ) + yJ_v(idx-1);
     end
