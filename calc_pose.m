@@ -20,7 +20,7 @@ function [ y ] = calc_pose( x, t, T, f, u )
 	%titlename = sprintf('Berechnete SinusKurve\nt=%f T=%f f=%f u=%f',t,T,f,u);
 	%title(titlename);
 
-	%filename = sprintf('calc_pose.png');
+	%filename = sprintf('plots/calc_pose.png');
 	%print(filename,'-dpng');
 
 end

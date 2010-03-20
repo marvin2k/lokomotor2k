@@ -44,5 +44,5 @@ function [xJ_v yJ_v alpha_v] = emulate_pose( coeffs_v, n, L, t_seq, alpha_max )
 %	titlename = sprintf('Emulierte Schwanzsegemente\nc1=%f c2=%f k=%f delta_t=%f',c1,c2,k,delta_t);
 %	title(titlename);
 
-%	filename = sprintf('emulate_pose.png');
+%	filename = sprintf('plots/emulate_pose.png');
 %	print(filename,'-dpng');

@@ -44,6 +44,6 @@ function [xJ_v, yJ_v, alpha_v]=fit_pose( pose, n, L, alpha_max )
 %	titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%f L=%f alpha_{max}=%f',n,L,alpha_max);
 %	title(titlename);
 
-%	filename = sprintf('fit_pose.png');
+%	filename = sprintf('plots/fit_pose.png');
 %	print(filename,'-dpng');
 end

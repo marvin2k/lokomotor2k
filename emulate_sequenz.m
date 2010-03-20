@@ -4,12 +4,12 @@
 % Plottet jeweiligen Schwanzverlauf zusammen mit dem zeitlichen Verlauf der Parameter, jeweils normiert auf 1, mit Zeitbalken
 %
 %
-% @param coeffs_M Enthält c1 c2 k und delta_t, jeweils eine Zeile für ein einzelnes Bild der gesamten Sequenz. Somit kodiert diese Matrix auch die Länge der Animationssequenz in Bildern
-% @param n Anzahl der Gelenke
+% @param coeffs_M Enthält c1 c2 k und delta_t, jeweils eine Zeile für ein einzelnes Bild der gesamten Sequenz. DAmit kodiert diese Matrix auch die Länge der Animationssequenz (die Anzahl der zu erzeugenden Bilder)
+% @param n Anzahl der Gelenke des Fischschwanzes
 % @param L Länge der Einzelnen Gelenkabschnitte
-% @param alpha_max Maximaler Biegeradiu (TODO: Auswerten, wird zur Zeit nur zur Anzeige verwendet)
+% @param alpha_max Maximaler Biegeradius (TODO: Auswerten, wird zur Zeit nur zur Anzeige verwendet)
 %
-% @return Das übliche... Koordinaten und Winkel
+% @return Das übliche... Koordinaten und Winkel über die Zeit
 %%
 function [xJ_M yJ_M alpha_M]=emulate_sequenz( coeffs_M, n, L, alpha_max )
 % Frames per Second, für die zu erstellende Animation
@@ -69,7 +69,7 @@ for frame = 1:animation_length
 	titlename = sprintf('c_1=%f c_2=%f k=%f delta_t=%f\nt_seq=%f',c1,c2,k,delta_t,t_seq);
 	title(titlename);
 
-	filename = sprintf('./plots/anim_%04i.png',frame);
+	filename = sprintf('plots/anim_%04i.png',frame);
 	print(filename,'-dpng');
 end
 
