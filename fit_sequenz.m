@@ -36,32 +36,32 @@ for frame = 1:number_of_frames
 end
 
     % Zeichnen
-for frame = 1:number_of_frames
-
-    clf;
-    hold on;
-    plot(pose(frame,:));
-    xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
-    ylabel('Seitliche Auslenkung');
-    line([xJ_M(frame,1:end-1);xJ_M(frame,2:end)],[yJ_M(frame,1:end-1);yJ_M(frame,2:end)],'Color','r');
-    axis([0 n*L*1.1 -max(max(abs(yJ_M)))*1.5 max(max(abs(yJ_M)))*1.5],'equal');
-    % selbst gebaute Funktion zum anzeigen der physikalisch möglichen Drehwinkel eines Gelenks
-    draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
-
-    legend('Berechnete Schwanzpose','Segmentgeraden des Roboterschwanzes');
-    titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%i L=%i alpha_{max}=%f',n,L,alpha_max);
-    title(titlename);
-
-    filename = sprintf('plots/fit_sequenz_%04i.png',frame);
-    print(filename,'-dpng');
-end
-
-    % Video erstellen
-callname = sprintf('ffmpeg -r %i -i plots/fit_sequenz_%%04d.png -y -an -b 1200k animations/animation_fit_sequenz.mp4',fps);
-system(callname);
-
-    % Alte Dateien aufraeumen:
-for frame = 1:number_of_frames
-    callname = sprintf('rm -f plots/fit_sequenz_%04i.png',frame);
-    system(callname);
-end
+%for frame = 1:number_of_frames
+%
+%   clf;
+%    hold on;
+%    plot(pose(frame,:));
+%    xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
+%    ylabel('Seitliche Auslenkung');
+%    line([xJ_M(frame,1:end-1);xJ_M(frame,2:end)],[yJ_M(frame,1:end-1);yJ_M(frame,2:end)],'Color','r');
+%    axis([0 n*L*1.1 -max(max(abs(yJ_M)))*1.5 max(max(abs(yJ_M)))*1.5],'equal');
+%    % selbst gebaute Funktion zum anzeigen der physikalisch möglichen Drehwinkel eines Gelenks
+%    draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
+%
+%    legend('Berechnete Schwanzpose','Segmentgeraden des Roboterschwanzes');
+%    titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%i L=%i alpha_{max}=%f',n,L,alpha_max);
+%    title(titlename);
+%
+%    filename = sprintf('plots/fit_sequenz_%04i.png',frame);
+%    print(filename,'-dpng');
+%end
+%
+%    % Video erstellen
+%callname = sprintf('ffmpeg -r %i -i plots/fit_sequenz_%%04d.png -y -an -b 1200k animations/animation_fit_sequenz.mp4',fps);
+%system(callname);
+%
+%    % Alte Dateien aufraeumen:
+%for frame = 1:number_of_frames
+%    callname = sprintf('rm -f plots/fit_sequenz_%04i.png',frame);
+%    system(callname);
+%end
