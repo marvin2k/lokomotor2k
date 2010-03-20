@@ -34,5 +34,5 @@ diff_v = sum(diff_M);
 diff = sum(diff_v);
 
 sq_diff = diff.^2;
-out = sum(sq_diff)
+out = sum(sq_diff);
 end
