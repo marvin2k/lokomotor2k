@@ -26,7 +26,7 @@ yJ_M = zeros(number_of_frames,n+1);
 alpha_M = zeros(number_of_frames,n+1);
 pose = zeros(number_of_frames,length(x));
 
-for frame=1:number_of_frames
+for frame = 1:number_of_frames
 
     pose(frame,:) = calc_pose( x, frame, number_of_frames, f, u );
 
@@ -36,19 +36,19 @@ for frame=1:number_of_frames
 end
 
     % Zeichnen
-for frame=1:number_of_frames
+for frame = 1:number_of_frames
 
     clf;
     hold on;
     plot(pose(frame,:));
     xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
     ylabel('Seitliche Auslenkung');
-    legend('Berechnete Schwanzpose');
     line([xJ_M(frame,1:end-1);xJ_M(frame,2:end)],[yJ_M(frame,1:end-1);yJ_M(frame,2:end)],'Color','r');
-    axis([0 max(x)*1.1 -max(max(abs(yJ_M)))*1.1 max(max(abs(yJ_M)))*1.1],'equal');
+    axis([0 n*L*1.1 -max(max(abs(yJ_M)))*1.5 max(max(abs(yJ_M)))*1.5],'equal');
     % selbst gebaute Funktion zum anzeigen der physikalisch möglichen Drehwinkel eines Gelenks
     draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
 
+    legend('Berechnete Schwanzpose','Segmentgeraden des Roboterschwanzes');
     titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%i L=%i alpha_{max}=%f',n,L,alpha_max);
     title(titlename);
 
