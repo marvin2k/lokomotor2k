@@ -74,7 +74,7 @@ for frame = 1:animation_length
 end
 
 %identifier = sprintf('c1-%1.4f_c2-%1.4f',c1,c2);
-%callname = sprintf('ffmpeg -r 24 -i ./plots/anim_%%04d.png -y -an -b 1200k ./animations/animation_%s.mp4',identifier);
+%callname = sprintf('ffmpeg -r %i -i plots/anim_%%04d.png -y -an -b 1200k animations/animation_%s.mp4',fps,identifier);
 %system(callname);
 
 % Alte Dateien aufraeumen:

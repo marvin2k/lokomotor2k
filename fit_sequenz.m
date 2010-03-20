@@ -14,6 +14,7 @@
 %
 %%
 function [xJ_M, yJ_M, alpha_M]=fit_sequenz( f, u, number_of_frames, n, L, alpha_max )
+fps=24;
 
 % nur wenn sich der Schwanz komplett lang macht, hat er die maximale Länge
 x=[0:L*n];
@@ -53,11 +54,11 @@ for frame=1:number_of_frames
 end
 
 	% Video erstellen
-callname = sprintf('ffmpeg -r 12 -i fit_sequenz_%%04d.png -y -an -b 1200k animation_fit_sequenz.mp4');
+callname = sprintf('ffmpeg -r %i -i plots/fit_sequenz_%%04d.png -y -an -b 1200k animations/animation_fit_sequenz.mp4',fps);
 system(callname);
 
 	% Alte Dateien aufraeumen:
 for frame = 1:number_of_frames
-	callname = sprintf('rm -f fit_sequenz_%04i.png',frame);
+	callname = sprintf('rm -f plots/fit_sequenz_%04i.png',frame);
 	system(callname);
 end

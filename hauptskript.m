@@ -5,7 +5,7 @@
 %
 %
 %%
-function [] = hauptscript()
+function [] = hauptskript()
 
 % Parameter laden. Diese liegen als Zahlen in einer seperaten m-Datei und sieht mit einem suffix vor dem lokalen Namensraum geschützt
 params;
