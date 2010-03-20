@@ -16,9 +16,12 @@ end
 function [out]=funfun(alpha, alpha_last, alpha_max, xF, yF, sineCurve)
 badnumber=bitmax;
 
-xE_v(1)=0;
-yE_v(1)=0;
-L=60;
+% TODO: hier wird die Länge der Gelenksegmente benötigt!
+%---
+params;
+L=param_L;
+%---
+
 x=[0:length(sineCurve)];
 y_fun=zeros(size(x));
 out=0;
