@@ -27,10 +27,10 @@ alpha_M = zeros(number_of_frames,n+1);
 
 for frame=1:number_of_frames
 
-    pose = calc_pose( x, frame, number_of_frames, f, u );
+    pose(frame) = calc_pose( x, frame, number_of_frames, f, u );
 
     % Jeweils einen Ergebnisssatz in Rückgabe-Matrix abspeichern
-    [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = fit_pose( pose, n, L, alpha_max );
+    [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = fit_pose( pose(frame), n, L, alpha_max );
 
 end
 
@@ -39,7 +39,7 @@ for frame=1:number_of_frames
 
     clf;
     hold on;
-    plot(pose);
+    plot(pose(frame));
     xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
     ylabel('Seitliche Auslenkung');
     legend('Berechnete Schwanzpose');
