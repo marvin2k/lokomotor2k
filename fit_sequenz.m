@@ -24,13 +24,14 @@ x=[0:L*n];
 xJ_M = zeros(number_of_frames,n+1);
 yJ_M = zeros(number_of_frames,n+1);
 alpha_M = zeros(number_of_frames,n+1);
+pose = zeros(number_of_frames,length(x));
 
 for frame=1:number_of_frames
 
-    pose(frame) = calc_pose( x, frame, number_of_frames, f, u );
+    pose(frame,:) = calc_pose( x, frame, number_of_frames, f, u );
 
     % Jeweils einen Ergebnisssatz in Rückgabe-Matrix abspeichern
-    [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = fit_pose( pose(frame), n, L, alpha_max );
+    [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = fit_pose( pose(frame,:), n, L, alpha_max );
 
 end
 
@@ -39,12 +40,12 @@ for frame=1:number_of_frames
 
     clf;
     hold on;
-    plot(pose(frame));
+    plot(pose(frame,:));
     xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
     ylabel('Seitliche Auslenkung');
     legend('Berechnete Schwanzpose');
     line([xJ_M(frame,1:end-1);xJ_M(frame,2:end)],[yJ_M(frame,1:end-1);yJ_M(frame,2:end)],'Color','r');
-    axis([0 max(x)*1.1 -max(max(abs(yJ_M))) max(max(abs(yJ_M)))],'equal');
+    axis([0 max(x)*1.1 -max(max(abs(yJ_M)))*1.1 max(max(abs(yJ_M)))*1.1],'equal');
     % selbst gebaute Funktion zum anzeigen der physikalisch möglichen Drehwinkel eines Gelenks
     draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
 
