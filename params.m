@@ -18,8 +18,8 @@ param_f = 0.0009;
 param_u = 0.1;
 
 % Bereits ermittelte Beispielwerte für c1 und c2, Kurvenschwimmen und Sequenzdauer
-param_c1 = 1;
-param_c2 = 1;
+param_c1 = 0.008;
+param_c2 = 1.5;
 param_k = 0.00001;%damits beim normierne keine division durch null gibt...
-param_delta_t = 0.1;
+param_delta_t = 1/50;%erstmal die gleiche schlagfreuqenz wie bei der erstellung der sequenz
 param_animation_length = 50;%gibts schon, oben

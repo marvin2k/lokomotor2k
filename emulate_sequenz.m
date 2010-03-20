@@ -11,7 +11,7 @@
 %
 % @return Das übliche... Koordinaten und Winkel über die Zeit
 %%
-function [xJ_M yJ_M alpha_M] = emulate_sequenz( coeffs_M, n, L, alpha_max )
+function [xJ_M2 yJ_M2 alpha_M2] = emulate_sequenz( coeffs_M, n, L, alpha_max )
 % Frames per Second, für die zu erstellende Animation
 fps = 24;
 
@@ -19,21 +19,20 @@ fps = 24;
 animation_length = length(coeffs_M);
 
 % Matrizen vorbereiten
-xJ_M = zeros(animation_length,n+1);
-yJ_M = zeros(animation_length,n+1);
-alpha_M = zeros(animation_length,n+1);
+xJ_M2 = zeros(animation_length,n+1);
+yJ_M2 = zeros(animation_length,n+1);
+alpha_M2 = zeros(animation_length,n+1);
 
-
-t_seq = linspace(0,animation_length/fps,animation_length);
+t = 0;
 for frame = 1:animation_length
 
-    % Vorbereitungen:
-
-    % t weiterlaufen lassen, darf auch über 1 hinausgehen, wird später mit 2pi normiert und fällt dann in die Periodizität von sin weg
+	t_seq(frame) = t;
 
     % Kernstück: Berechnung der Stellung. Rückgabeformat das gleiche wie das von fit_pose!
-    [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = emulate_pose( coeffs_M(frame,:), n, L, t_seq(frame), alpha_max );
+    [xJ_M2(frame,:), yJ_M2(frame,:) alpha_M2(frame,:)] = emulate_pose( coeffs_M(frame,:), n, L, t_seq(frame), alpha_max );
 
+	delta_t = coeffs_M(frame,4);%schlagfrequenz
+	t = t + delta_t;
 end
 
    % Zeichnen
@@ -47,10 +46,10 @@ for frame = 1:animation_length
     hold on;
     xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
     ylabel('Seitliche Auslenkung');
-    line([xJ_M(frame,1:end-1);xJ_M(frame,2:end)],[yJ_M(frame,1:end-1);yJ_M(frame,2:end)],'Color','r');
-    axis([0 n*L*1.1 -max(max(abs(yJ_M)))*1.5 max(max(abs(yJ_M)))*1.5]);
+    line([xJ_M2(frame,1:end-1);xJ_M2(frame,2:end)],[yJ_M2(frame,1:end-1);yJ_M2(frame,2:end)],'Color','r');
+    axis([0 n*L*1.1 -max(max(abs(yJ_M2)))*1.5 max(max(abs(yJ_M2)))*1.5]);
     % selbst gebaute Funktion zum anzeigen der physikalisch möglichen Drehwinkel eines Gelenks
-    draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
+    draw_half_circles( xJ_M2(frame,1:end-1), yJ_M2(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M2(frame,1:end-1));
 
     % Aktuelle Parameter feststellen (Eigentlich nur zum plotten nötig)
     c1 = coeffs_M(frame,1);%amplitude

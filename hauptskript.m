@@ -25,8 +25,8 @@ u = param_u;
 % weitere parameter aus Datei nach lokal holen
 animation_length = param_animation_length;
 delta_t = param_delta_t;
-c1 = param_c1;
-c2 = param_c2;
+%c1 = param_c1;
+%c2 = param_c2;
 %k fehlt noch
 coeffs_v = [c1 c2 0 delta_t];
 

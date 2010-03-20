@@ -26,7 +26,7 @@ function [xJ_v yJ_v alpha_v] = emulate_pose( coeffs_v, n, L, t_seq, alpha_max )
     % In einem Rutsch alle Winkel berechnen
     alpha_v = c1*idx.*sin(c2*idx-t_seq*2*pi);
     % Kurvenausschlag addieren:
-    % TODO: muss heir nicht der erste winkel adressiert werden?
+    % TODO: muss hier nicht der erste winkel adressiert werden?
     alpha_v(2) = alpha_v(2)+k;
 
     % Nun noch die Endpunkte der Gelenkkette mittels der berechneten Winkel berechnen
