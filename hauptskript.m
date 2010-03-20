@@ -22,10 +22,11 @@ u = param_u;
 % zweites Skript um aus dem Winkelverlauf einer Sequenz die Parameter der approximierenden winkelfunktion herzuleiten
 [c1 c2] = fit_emulation_coeffs( alpha_M );
 
-% weitere parameter lokal holen
+% weitere parameter aus Datei nach lokal holen
 animation_length = param_animation_length;
 delta_t = param_delta_t;
-% Parameter aus Datei laden: %c1 = param_c1; %c2 = param_c2;
+c1 = param_c1;
+c2 = param_c2;
 %k fehlt noch
 coeffs_v = [c1 c2 0 delta_t];
 

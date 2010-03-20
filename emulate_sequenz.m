@@ -23,22 +23,16 @@ xJ_M = zeros(animation_length,n+1);
 yJ_M = zeros(animation_length,n+1);
 alpha_M = zeros(animation_length,n+1);
 
-t_seq = 0;
+
+t_seq = linspace(0,animation_length/fps,animation_length);
 for frame = 1:animation_length
 
     % Vorbereitungen:
 
-    % Aktuelle Parameter feststellen (Eigentlich nur zum plotten nötig)
-    c1 = coeffs_M(frame,1);%amplitude
-    c2 = coeffs_M(frame,2);%welligkeit
-    k = coeffs_M(frame,3);%kurve
-    delta_t = coeffs_M(frame,4);%schlagfrequenz
-
     % t weiterlaufen lassen, darf auch über 1 hinausgehen, wird später mit 2pi normiert und fällt dann in die Periodizität von sin weg
-    t_seq = t_seq + delta_t;
 
     % Kernstück: Berechnung der Stellung. Rückgabeformat das gleiche wie das von fit_pose!
-    [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = emulate_pose( coeffs_M(frame,:), n, L, t_seq );
+    [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = emulate_pose( coeffs_M(frame,:), n, L, t_seq(frame), alpha_max );
 
 end
 
@@ -58,23 +52,27 @@ for frame = 1:animation_length
     % selbst gebaute Funktion zum anzeigen der physikalisch möglichen Drehwinkel eines Gelenks
     draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
 
-    legend('Berechnete Schwanzpose','Segmentgeraden des Roboterschwanzes');
+    % Aktuelle Parameter feststellen (Eigentlich nur zum plotten nötig)
+    c1 = coeffs_M(frame,1);%amplitude
+    c2 = coeffs_M(frame,2);%welligkeit
+    k = coeffs_M(frame,3);%kurve
+    delta_t = coeffs_M(frame,4);%schlagfrequenz
+
+    legend('Segmentgeraden des Roboterschwanzes');
     titlename = sprintf('Emulierte Schwanzsegemente\nc1=%f c2=%f k=%f delta_t=%f',c1,c2,k,delta_t);
     title(titlename);
 
     subplot(2,1,2)
 
-    % Plotten der Zeitachse des Parametersatzes, mit Zeitmarke
-    t_axis = linspace(0,animation_length/fps,animation_length);
-%    plot(t_axis,coeffs_M(:,1)/max(abs(coeffs_M(:,1))),t_axis,coeffs_M(:,2)/max(abs(coeffs_M(:,2))),t_axis,coeffs_M(:,3)/max(abs(coeffs_M(:,3))),t_axis,coeffs_M(:,4)/max(abs(coeffs_M(:,4))));
+%    plot(t_seq,coeffs_M(:,1)/max(abs(coeffs_M(:,1))),t_seq,coeffs_M(:,2)/max(abs(coeffs_M(:,2))),t_seq,coeffs_M(:,3)/max(abs(coeffs_M(:,3))),t_seq,coeffs_M(:,4)/max(abs(coeffs_M(:,4))));
     % zeichnen der "Zeitbarke"
-    line([t_axis(frame) t_axis(frame)], [-0.2 1.2],'Color','k');
+    line([t_seq(frame) t_seq(frame)], [-0.2 1.2],'Color','k');
 %    legend('c_1','c_2','k','delta_t');
     ylabel('c/c_{max}')
     xlabel('t in Sekunden');
-    axis([1 max(t_axis) -0.2 1.2]);
+    axis([0 max(t_seq) -0.2 1.2]);
 
-    titlename = sprintf('c_1=%f c_2=%f k=%f delta_t=%f\nt_seq=%f',c1,c2,k,delta_t,t_seq);
+    titlename = sprintf('c_1=%f c_2=%f k=%f delta_t=%f\nt_seq=%f',c1,c2,k,delta_t,t_seq(frame));
     title(titlename);
 
     filename = sprintf('plots/anim_%04i.png',frame);
