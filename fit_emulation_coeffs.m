@@ -12,10 +12,10 @@
 %%
 function [c1 c2] = fit_emulation_coeffs( alpha_M );
 
-	% Das hier ist eigentlich nur eine Wrapperfunktion.
-	emulation_coeffs_v = fminsearch(@funfun,[0.1 1],[],[],alpha_M);
-	c1 = emulation_coeffs_v(1);
-	c2 = emulation_coeffs_v(2);
+    % Das hier ist eigentlich nur eine Wrapperfunktion.
+    emulation_coeffs_v = fminsearch(@funfun,[0.1 1],[],[],alpha_M);
+    c1 = emulation_coeffs_v(1);
+    c2 = emulation_coeffs_v(2);
 
 
 function out=funfun(coeff,alpha_M)

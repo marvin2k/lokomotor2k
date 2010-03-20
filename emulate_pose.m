@@ -12,37 +12,37 @@
 % @return Enthält analog zum Rückgabewert von fit_pose.m n+1 Winkel, welche eine Schwanzpose beschreiben. Der erste ist Null, und dient der "Aufhängung"
 %%
 function [xJ_v yJ_v alpha_v] = emulate_pose( coeffs_v, n, L, t_seq, alpha_max )
-	
-	c1 = coeffs_v(1);
-	c2 = coeffs_v(2);
-	k = coeffs_v(3);
+    
+    c1 = coeffs_v(1);
+    c2 = coeffs_v(2);
+    k = coeffs_v(3);
 
-	xJ_v = zeros(1,n+1);
-	yJ_v = zeros(1,n+1);
-	alpha_v = zeros(1,n+1);
+    xJ_v = zeros(1,n+1);
+    yJ_v = zeros(1,n+1);
+    alpha_v = zeros(1,n+1);
 
-	% Octave-Eigenschaft zur schnellen Tabellenbrechnung ausnutzen
-	idx = 0:n;
-	% In einem Rutsch alle Winkel berechnen
-	alpha_v = c1*idx.*sin(c2*idx-t_seq*2*pi);
-	% Kurvenausschlag addieren:
-	alpha_v(2) = alpha_v(2)+k;
+    % Octave-Eigenschaft zur schnellen Tabellenbrechnung ausnutzen
+    idx = 0:n;
+    % In einem Rutsch alle Winkel berechnen
+    alpha_v = c1*idx.*sin(c2*idx-t_seq*2*pi);
+    % Kurvenausschlag addieren:
+    alpha_v(2) = alpha_v(2)+k;
 
-	% Nun noch die Endpunkte der Gelenkkette mittels der berechneten Winkel berechnen
-	for idx=2:n+1
+    % Nun noch die Endpunkte der Gelenkkette mittels der berechneten Winkel berechnen
+    for idx=2:n+1
         xJ_v(idx) = L*cos( alpha_v(idx) ) + xJ_v(idx-1);
         yJ_v(idx) = L*sin( alpha_v(idx) ) + yJ_v(idx-1);
-	end
+    end
 
-%	clf;
-%	hold on;
-%	xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
-%	ylabel('Seitliche Auslenkung');
-%	line([xJ_v(1:end-1);xJ_v(2:end)],[yJ_v(1:end-1);yJ_v(2:end)],'Color','r');
-%	axis([0 (n+1)*L -3*L 3*L],'equal');
-%	draw_half_circles( xJ_v(1:end-1), yJ_v(1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_v(1:end-1));
-%	titlename = sprintf('Emulierte Schwanzsegemente\nc1=%f c2=%f k=%f delta_t=%f',c1,c2,k,delta_t);
-%	title(titlename);
+%    clf;
+%    hold on;
+%    xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
+%    ylabel('Seitliche Auslenkung');
+%    line([xJ_v(1:end-1);xJ_v(2:end)],[yJ_v(1:end-1);yJ_v(2:end)],'Color','r');
+%    axis([0 (n+1)*L -3*L 3*L],'equal');
+%    draw_half_circles( xJ_v(1:end-1), yJ_v(1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_v(1:end-1));
+%    titlename = sprintf('Emulierte Schwanzsegemente\nc1=%f c2=%f k=%f delta_t=%f',c1,c2,k,delta_t);
+%    title(titlename);
 
-%	filename = sprintf('plots/emulate_pose.png');
-%	print(filename,'-dpng');
+%    filename = sprintf('plots/emulate_pose.png');
+%    print(filename,'-dpng');

@@ -12,15 +12,15 @@
 %%
 function [ y ] = calc_pose( x, t, T, f, u )
 
-	y = (x*u).*(sin( x*f - 2*pi*(t/T) ));
+    y = (x*u).*(sin( x*f - 2*pi*(t/T) ));
 
-	%plot(x,y)
-	%xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
-	%ylabel('Seitliche Auslenkung');
-	%titlename = sprintf('Berechnete SinusKurve\nt=%f T=%f f=%f u=%f',t,T,f,u);
-	%title(titlename);
+    %plot(x,y)
+    %xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
+    %ylabel('Seitliche Auslenkung');
+    %titlename = sprintf('Berechnete SinusKurve\nt=%f T=%f f=%f u=%f',t,T,f,u);
+    %title(titlename);
 
-	%filename = sprintf('plots/calc_pose.png');
-	%print(filename,'-dpng');
+    %filename = sprintf('plots/calc_pose.png');
+    %print(filename,'-dpng');
 
 end

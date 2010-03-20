@@ -16,13 +16,13 @@
 function [ ] = draw_half_circles( xM_v, yM_v, r_v, phi_var_v, phi_null_v )
 
 for i=1:length(r_v)
-	phi=phi_null_v(i)-phi_var_v(i):0.001:phi_null_v(i)+phi_var_v(i);
+    phi=phi_null_v(i)-phi_var_v(i):0.001:phi_null_v(i)+phi_var_v(i);
 
-	%polar:
-	y_p = yM_v(i) + r_v(i)*sin(phi);
-	x_p = xM_v(i) + r_v(i)*cos(phi);
+    %polar:
+    y_p = yM_v(i) + r_v(i)*sin(phi);
+    x_p = xM_v(i) + r_v(i)*cos(phi);
 
-	hold on;
-	plot(x_p,y_p,'r')
-	hold off;
+    hold on;
+    plot(x_p,y_p,'r')
+    hold off;
 end

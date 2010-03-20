@@ -23,29 +23,29 @@ x=[0:length(sineCurve)];
 y_fun=zeros(size(x));
 out=0;
 
-	if (alpha < (alpha_last-alpha_max)) out=badnumber;return;end
-	if (alpha > (alpha_last+alpha_max)) out=badnumber;return;end
+    if (alpha < (alpha_last-alpha_max)) out=badnumber;return;end
+    if (alpha > (alpha_last+alpha_max)) out=badnumber;return;end
 
-	xE = L*cos( alpha ) + xF;
-	yE = L*sin( alpha ) + yF;
+    xE = L*cos( alpha ) + xF;
+    yE = L*sin( alpha ) + yF;
 
-	if ( (xE-xF)<1 ) out=badnumber;return;end%nötig? ja!
+    if ( (xE-xF)<1 ) out=badnumber;return;end%nötig? ja!
 
-	xF = floor(xF)+1;
-	yF = floor(yF)+1;
-	xE = floor(xE)+1;
-	yE = floor(yE)+1;
+    xF = floor(xF)+1;
+    yF = floor(yF)+1;
+    xE = floor(xE)+1;
+    yE = floor(yE)+1;
 
-	n =  yF-(yF-yE)/(xF-xE)*xF;
-	m = (yE-yF)/(xE-xF);
+    n =  yF-(yF-yE)/(xF-xE)*xF;
+    m = (yE-yF)/(xE-xF);
 
-	y_fun(xF:xE) = m*x(xF:xE) + n;
+    y_fun(xF:xE) = m*x(xF:xE) + n;
 
 
 diff = y_fun(xF:xE) - sineCurve(xF:xE);
 
 sq_diff = diff.^2;
 if (out ~= badnumber)
-	out = sum(sq_diff);
+    out = sum(sq_diff);
 end
 end

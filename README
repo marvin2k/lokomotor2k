@@ -5,7 +5,9 @@ Welcome to
 Fischanimationen leicht gemacht!
 --------------------------------
 
-Es lässt sich eine Kurvensequenz vorgeben, für welche die Gelenkwinkel berechnet werden. Daraus wiederrum lassen sich unter Umständen Funktionen für diese Winkel über die Zeit ableiten. Beispiel:
+Getestet und entwickelt unter Linux/Octave 3.0.5
+
+Es lässt sich eine Kurvensequenz vorgeben, für welche die Gelenkwinkel berechnet werden. Daraus wiederrum lassen sich unter Umständen Funktionen für diese Winkel über die Zeit ableiten. Hier verwendetes Beispiel:
 	x*sin(x-t)
 
 calc_*			Mathematische Berechnung mit exakter Formel

@@ -27,38 +27,40 @@ alpha_M = zeros(number_of_frames,n+1);
 
 for frame=1:number_of_frames
 
-	pose = calc_pose( x, frame, number_of_frames, f, u );
+    pose = calc_pose( x, frame, number_of_frames, f, u );
 
-	% Jeweils einen Ergebnisssatz in Rückgabe-Matrix abspeichern
-	[xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = fit_pose( pose, n, L, alpha_max );
+    % Jeweils einen Ergebnisssatz in Rückgabe-Matrix abspeichern
+    [xJ_M(frame,:), yJ_M(frame,:) alpha_M(frame,:)] = fit_pose( pose, n, L, alpha_max );
 
 end
 
+    % Zeichnen
 for frame=1:number_of_frames
 
-	clf;
-	hold on;
-	plot(pose);
-	xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
-	ylabel('Seitliche Auslenkung');
-	legend('Berechnete Schwanzpose');
-	line([xJ_M(frame,1:end-1);xJ_M(frame,2:end)],[yJ_M(frame,1:end-1);yJ_M(frame,2:end)],'Color','r');
-	axis([0 max(x) -max(max(abs(yJ_M))) max(max(abs(yJ_M)))],'equal');
-	draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
+    clf;
+    hold on;
+    plot(pose);
+    xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
+    ylabel('Seitliche Auslenkung');
+    legend('Berechnete Schwanzpose');
+    line([xJ_M(frame,1:end-1);xJ_M(frame,2:end)],[yJ_M(frame,1:end-1);yJ_M(frame,2:end)],'Color','r');
+    axis([0 max(x)*1.1 -max(max(abs(yJ_M))) max(max(abs(yJ_M)))],'equal');
+    % selbst gebaute Funktion zum anzeigen der physikalisch möglichen Drehwinkel eines Gelenks
+    draw_half_circles( xJ_M(frame,1:end-1), yJ_M(frame,1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_M(frame,1:end-1));
 
-	titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%i L=%i alpha_{max}=%f',n,L,alpha_max);
-	title(titlename);
+    titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%i L=%i alpha_{max}=%f',n,L,alpha_max);
+    title(titlename);
 
-	filename = sprintf('plots/plots/fit_sequenz_%04i.png',frame);
-	print(filename,'-dpng');
+    filename = sprintf('plots/fit_sequenz_%04i.png',frame);
+    print(filename,'-dpng');
 end
 
-	% Video erstellen
+    % Video erstellen
 callname = sprintf('ffmpeg -r %i -i plots/fit_sequenz_%%04d.png -y -an -b 1200k animations/animation_fit_sequenz.mp4',fps);
 system(callname);
 
-	% Alte Dateien aufraeumen:
+    % Alte Dateien aufraeumen:
 for frame = 1:number_of_frames
-	callname = sprintf('rm -f plots/fit_sequenz_%04i.png',frame);
-	system(callname);
+    callname = sprintf('rm -f plots/fit_sequenz_%04i.png',frame);
+    system(callname);
 end
