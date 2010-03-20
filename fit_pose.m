@@ -32,17 +32,17 @@ function [xJ_v, yJ_v, alpha_v]=fit_pose( pose, n, L, alpha_max )
         yJ_v(idx) = L*sin( alpha_v(idx) ) + yJ_v(idx-1);
     end
 
-    clf;
-    hold on;
-    plot(pose);
-    xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
-    ylabel('Seitliche Auslenkung');
-    legend('Berechnete Schwanz Pose');
-    line([xJ_v(1:end-1);xJ_v(2:end)],[yJ_v(1:end-1);yJ_v(2:end)],'Color','r');
-    axis([0 (n+1)*L -3*L 3*L],'equal');
-    draw_half_circles( xJ_v(1:end-1), yJ_v(1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_v(1:end-1));
-    titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%i L=%i alpha_{max}=%f',n,L,alpha_max);
-    title(titlename);
+%   clf;
+%   hold on;
+%   plot(pose);
+%   xlabel('<- Kopf | Abstand vom Kopf | Schwanz ->');
+%   ylabel('Seitliche Auslenkung');
+%   legend('Berechnete Schwanz Pose');
+%   line([xJ_v(1:end-1);xJ_v(2:end)],[yJ_v(1:end-1);yJ_v(2:end)],'Color','r');
+%   axis([0 (n+1)*L -3*L 3*L],'equal');
+%   draw_half_circles( xJ_v(1:end-1), yJ_v(1:end-1), ones(1,n)*L, ones(1,n)*alpha_max, alpha_v(1:end-1));
+%   titlename = sprintf('Berechnete SinusKurve mit approximierten Schwanzsegementen\nn=%i L=%i alpha_{max}=%f',n,L,alpha_max);
+%   title(titlename);
 
 %    filename = sprintf('plots/fit_pose.png');
 %    print(filename,'-dpng');
