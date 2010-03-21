@@ -28,6 +28,6 @@ idx = 0:5;
 alpha_v = c1*idx.*sin(c2*idx);
 
 
-diff = sum(alpha_M(1,:) - alpha_v)
+diff = sum(alpha_M(1,:) - alpha_v);
 out = diff^2;
 end
